@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
+
 export default function Card({ id, name, temperaments, weight, image }) {
+    const uniqueTemperaments = [...new Set(temperaments)];
+
     return (
         <div className="card">
             <div className="cardImg">
@@ -14,12 +17,9 @@ export default function Card({ id, name, temperaments, weight, image }) {
                 <div className="cardItems">
                     <h3 className="cardInfo">{weight.join(' - ')} Kg</h3>
                     <h3 className="cardInfo">
-                        {temperaments.join(', ').slice(0, 25)}...
+                        {uniqueTemperaments.slice(0, 25).join(', ')}...
                     </h3>
                 </div>
-                {/* <Link to={'/home/' + id}>
-                    <button>See more</button>
-                </Link> */}
             </div>
         </div>
     );

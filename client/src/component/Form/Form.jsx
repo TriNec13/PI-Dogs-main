@@ -90,19 +90,19 @@ export default function Form() {
         );
     }
     function handleSelectTemperament(option) {
-        setForm({
-            ...form,
-            temperaments: form.temperaments.includes(option)
-                ? form.temperaments
-                : [...form.temperaments, option],
-        });
-    }
-    function handleDeleteTemperament(option) {
-        setForm({
-            ...form,
-            temperaments: form.temperaments.filter((value) => value != option),
-        });
-    }
+        if (!form.temperaments.includes(option)) {
+          setForm((prevState) => ({
+            ...prevState,
+            temperaments: [...prevState.temperaments, option],
+          }));
+        }
+      }
+      function handleDeleteTemperament(option) {
+        setForm((prevState) => ({
+          ...prevState,
+          temperaments: prevState.temperaments.filter((value) => value !== option),
+        }));
+      }
     function createBreed(e) {
         e.preventDefault();
         dispatch(postBreed(form));

@@ -1,25 +1,23 @@
 import React, { useEffect } from 'react';
-// Vamos a usar Params
 import { Link, useParams } from 'react-router-dom';
-// Vamos a usar estados locales, asi cuando se carga el componente buscamos por id.
 import { useDispatch, useSelector } from 'react-redux';
 
 import { searchById } from '../../redux/actions/breedsActions.js';
 import Loading from '../Loading/Loading.jsx';
 import './Detail.css';
-// Usamos nuestro loader.
+
 export default function Detail() {
     const dispatch = useDispatch();
     const { id } = useParams();
-
-    // Cargamos el componente
     const { breedDetail } = useSelector((state) => state.breeds);
+    const { display } = useSelector((state) => state.loader);
+
     useEffect(() => {
         dispatch(searchById(id));
     }, [dispatch, id]);
-    // const { breedDetail } = useSelector((state) => state.breedDetail);
-    const { display } = useSelector((state) => state.loader);
-    // console.log(breedDetail);
+
+    const temperaments = breedDetail[0]?.temperaments || [];
+    const uniqueTemperaments = [...new Set(temperaments)];
 
     return (
         <div className="detailContainer">
@@ -54,23 +52,15 @@ export default function Detail() {
                         <div className="temperamentsDetail">
                             <h2>Temperaments:</h2>
                             <div className="temperamentsInfo">
-                                {/* <h2>
-                                    {breedDetail[0].temperaments.join(', ')}
-                                </h2> */}
-
-                                {breedDetail[0].temperaments
-                                    ? breedDetail[0].temperaments.map(
-                                          (temperament, index) => (
-                                              <h2 key={index}>{temperament}</h2>
-                                          )
-                                      )
-                                    : null}
+                                {uniqueTemperaments.map((temperament, index) => (
+                                    <h2 key={index}>{temperament}</h2>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
             ) : (
-                <>Chau</>
+                <div>Chau</div>
             )}
         </div>
     );
