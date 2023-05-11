@@ -218,4 +218,22 @@ app.post("/newbreed", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+// Eliminar una raza por su ID
+app.delete('/breeds/:id', async (req, res) => {
+  try {
+    const breedId = req.params.id;
+    // Buscar la raza en la base de datos
+    const breed = await Breed.findByPk(breedId);
+
+    if (breed) {
+      // Eliminar la raza de la base de datos
+      await breed.destroy();
+      res.status(200).json({ message: 'Breed deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Breed not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 module.exports = app;
