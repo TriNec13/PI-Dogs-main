@@ -8,3 +8,4 @@ export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 export const SEARCH_BY_ID = 'SEARCH_BY_ID';
 export const POST_BREED = 'POST_BREED';
 export const CLEAR_BREED_DETAIL = 'CLEAR_BREED_DETAIL';
+export const DELETE_BREED = 'DELETE_BREED';

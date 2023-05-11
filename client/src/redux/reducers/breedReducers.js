@@ -10,6 +10,7 @@ import {
     SEARCH_BY_ID,
     POST_BREED,
     CLEAR_BREED_DETAIL,
+    DELETE_BREED,
 } from '../actionsTypes/actionsTypes.js';
 
 // Definimos nuestro estado inicial.
@@ -141,6 +142,14 @@ function breedsReducers(state = initialState, action) {
         case POST_BREED:
             return {
                 ...state,
+            };
+        case DELETE_BREED:
+            // Filtra las razas y remueve la que tiene el ID especificado
+            const updatedBreeds = state.breeds.filter((breed) => breed.id !== action.payload);
+            // Retorna el nuevo estado con las razas actualizadas
+            return {
+                ...state,
+                breeds: updatedBreeds,
             };
         default:
             return state;

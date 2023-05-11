@@ -12,6 +12,7 @@ import {
     SEARCH_BY_ID,
     POST_BREED,
     CLEAR_BREED_DETAIL,
+    DELETE_BREED,
 } from '../actionsTypes/actionsTypes.js';
 
 import { startLoading, finishLoading } from '../actions/loaderActions.js';
@@ -138,6 +139,23 @@ export const postBreed = (breed) => {
         });
     };
 };
+//eliminar
+export const deleteBreed = (id) => {
+    return async (dispatch) => {
+      try {
+        // Realiza la solicitud DELETE al backend para eliminar la raza por su ID
+        await axios.delete(`/breeds/${id}`);
+        // Despacha la acción correspondiente en caso de éxito
+        dispatch({
+          type: DELETE_BREED,
+          payload: id,
+        });
+      } catch (error) {
+        // Manejo de errores en caso de que la eliminación falle
+        console.log(error);
+      }
+    };
+  };
 // export const postBreed = async (breed) => {
 //     const response = await axios.post('/newbreed', breed);
 //     return response;
