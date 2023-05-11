@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Card.css';
 
 export default function Card({ id, name, temperaments, weight, image }) {
     const uniqueTemperaments = [...new Set(temperaments)];
+    const limitedTemperaments = uniqueTemperaments.slice(0, 3);
 
     return (
         <div className="card">
@@ -17,7 +17,7 @@ export default function Card({ id, name, temperaments, weight, image }) {
                 <div className="cardItems">
                     <h3 className="cardInfo">{weight.join(' - ')} Kg</h3>
                     <h3 className="cardInfo">
-                        {uniqueTemperaments.slice(0, 25).join(', ')}...
+                        {limitedTemperaments.join(', ')}
                     </h3>
                 </div>
             </div>

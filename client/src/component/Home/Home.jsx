@@ -37,7 +37,7 @@ export default function Home() {
     const { display } = useSelector((state) => state.loader);
     /**
      * PAGINADO:
-     * Empezamos definicendo los estados locales.
+     * Empezamos definiendo los estados locales.
      */
     const [currentPage, setCurrentPage] = useState(1);
     const [breedsPerPage] = useState(8);
@@ -55,7 +55,7 @@ export default function Home() {
         const htmlCurrentPage = document.getElementsByClassName('elementLink');
         for (let page of htmlCurrentPage) {
             // console.log(`${currentPage} === ${page.id}`);
-            if (currentPage == page.id) {
+            if (currentPage === page.id) {
                 page.className = 'elementLink activePage';
             } else {
                 page.className = 'elementLink';
